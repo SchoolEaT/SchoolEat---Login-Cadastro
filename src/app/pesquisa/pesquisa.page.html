@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>Pesquisar produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="introducao">
+    <h1>Pesquise produtos perto de você</h1>
+  </div>
+
+  <div class="pesquisa">
+    <ion-searchbar color="tertiary" animated showCancelButton="focus" placeholder="Ex: Brownie, coxinha"></ion-searchbar>
+    
+    <ion-select value="relevancia" okText="Ok" cancelText="Cancelar">
+      <ion-select-option value="relevancia">Maior relevancia</ion-select-option>
+      <ion-select-option value="menor">Menor preço</ion-select-option>
+      <ion-select-option value="classificacao">Melhor classificação</ion-select-option>
+      <ion-select-option value="maior">Maior preço</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div class="resultado">
+  <div class="lista">
+    <p>Nome:</p>
+    <p>Descrição:</p>
+    <p>Tipo:</p>
+    <p>Valor:</p>
+  </div>
+  <div class="vendedor" routerLink="/tabs/vendedor">
+    <h2>DADOS</h2>
+    <h2>DO</h2>
+    <h2>VENDEDOR</h2>
+  </div>
+</div>
+
+
+</ion-content>
