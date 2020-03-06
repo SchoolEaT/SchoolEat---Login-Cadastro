@@ -15,19 +15,19 @@
     <div class="inputs">
       
     <div class="input">
-        <ion-input placeholder="Nome:"></ion-input>
+        <ion-input placeholder="Nome:" [(ngModel)]="produto.nomeProduto" ></ion-input>
     </div>
     <div class="input">
-      <ion-input placeholder="Descrição:"></ion-input>
+      <ion-input placeholder="Descrição:" [(ngModel)]="produto.descricaoProduto"></ion-input>
     </div>
     <div class="input">
-      <ion-input placeholder="Tipo:"></ion-input>
+      <ion-input placeholder="Tipo:" [(ngModel)]="produto.tipoProduto"></ion-input>
     </div>
     <div class="input">
-      <ion-input placeholder="Valor:"></ion-input>
+      <ion-input placeholder="Valor:" [(ngModel)]="produto.valorProduto"></ion-input>
     </div>
         <div class="cadastrar">
-          <ion-button size="small" color="warning">CADASTRAR</ion-button>
+          <ion-button size="small" color="warning" (click)="save()">CADASTRAR</ion-button>
         </div>
         <div class="voltar">
           <ion-button size="small" color="warning" routerLink="/tabs/home">voltar para o início</ion-button>

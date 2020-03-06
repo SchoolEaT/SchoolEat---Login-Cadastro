@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../home/home.module').then(m => m.HomePageModule)
+              import('../home/home.module').then(m => m.HomePageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -23,7 +25,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../config/config.module').then(m => m.ConfigPageModule)
+              import('../config/config.module').then(m => m.ConfigPageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -33,7 +36,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../pesquisa/pesquisa.module').then(m => m.PesquisaPageModule)
+              import('../pesquisa/pesquisa.module').then(m => m.PesquisaPageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -43,7 +47,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../cadastro-produto/cadastro-produto.module').then(m => m.CadastroProdutoPageModule)
+              import('../cadastro-produto/cadastro-produto.module').then(m => m.CadastroProdutoPageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -53,7 +58,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../sobre/sobre.module').then(m => m.SobrePageModule)
+              import('../sobre/sobre.module').then(m => m.SobrePageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -63,7 +69,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../privacidade/privacidade.module').then(m => m.PrivacidadePageModule)
+              import('../privacidade/privacidade.module').then(m => m.PrivacidadePageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -73,7 +80,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../vendedor/vendedor.module').then(m => m.VendedorPageModule)
+              import('../vendedor/vendedor.module').then(m => m.VendedorPageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },
@@ -83,7 +91,8 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../perfil/perfil.module').then(m => m.PerfilPageModule)
+              import('../perfil/perfil.module').then(m => m.PerfilPageModule),
+              canActivate: [AuthGuard]
           }
         ]
       },

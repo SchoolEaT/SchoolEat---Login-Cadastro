@@ -1,4 +1,8 @@
+import { ProdutoService } from './../services/produto.service';
+import { Produto } from './../interfaces/produto';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+
+public produtos = new Array<Produto>();
+private produtosSubscription: Subscription;
+
+
+
+  constructor
+  (
+    private produtoService: ProdutoService,
+    public authService: AuthService,
+  ) { 
+    this.produtosSubscription = this.produtoService
+      .getProdutos()
+      .subscribe(data =>{
+        this.produtos = data;
+      });
+      
+  }
+
+  ngOnDestroy() {
+    this.produtosSubscription.unsubscribe();
+  }
 
   ngOnInit() {
   }
 
+
+
+
+
+
+
+  async logout(){
+    try{
+        await this.authService.logout();
+    }catch(error){
+      console.error(error)
+    }
+  }
 }
