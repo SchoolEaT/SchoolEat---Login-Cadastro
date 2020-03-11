@@ -1,13 +1,21 @@
 import { Usuario } from './../interfaces/usuario';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
+import { Produto } from '../interfaces/produto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-private usuariosColecao: AngularFirestoreCollection<Usuario>
+private produtoColecao: AngularFirestoreCollection<Produto>
 
-  constructor() { }
+  constructor(private afs: AngularFirestore) {   this.produtoColecao = this.afs.collection<Produto>("Produtos");}
+
+
+
+GetProduto(id:string){
+  return this.produtoColecao.doc<Produto>(id).valueChanges();
+}
+
 }

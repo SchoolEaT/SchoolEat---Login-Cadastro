@@ -1,6 +1,7 @@
 export interface Usuario {
+     idUser?:string;
     nome?: string;
-    // telefone?: string;
+    telefone?: string;
     email?:string;
     password?: string;
     instituicao?:string;

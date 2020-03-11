@@ -18,7 +18,7 @@ export class CadastroProdutoPage implements OnInit {
 public produto : Produto = {};
 private loading: any;
 private produtoSubscription: Subscription;
- public  produtoId:any;
+private produtoId : string = null;
   constructor
   (
     private produtoService: ProdutoService,
@@ -28,18 +28,12 @@ private produtoSubscription: Subscription;
     private authService: AuthService,
     private toastCtrl: ToastController,
   ) { 
-    this.produtoId = this.activatedRoute.snapshot.params["id"];
-    if(this.produtoId) this.loadProduto(); 
+      this.produtoId = this.activatedRoute.snapshot.params['idUser'];
+
+      if(this.produtoId) this.loadProduto();
   }
 
 
-  loadProduto(){
-      this.produtoSubscription = this.produtoService
-      .listaProdutos(this.produtoId)
-      .subscribe(data =>{
-        this.produto = data;
-      });
-  }
 
 
 
@@ -47,29 +41,33 @@ private produtoSubscription: Subscription;
   ngOnInit() {
   }
 
+  loadProduto(){
+    this.produtoSubscription = this.produtoService.listaProdutos(this.produtoId).subscribe(data =>{
+      this.produto = data;
+    })
+  }
+
 async save(){
   await this.presentLoading();
 
+  this.produto.IdUser = this.authService.getAuth().currentUser.uid;
+
   if(this.produtoId){
-    try{
-      await this.produtoService.updateProdutos(this.produtoId, this.produto);
-      await this.loading.dismiss();
-    }catch(error){
-      this.presentToast("Error");
-      this.loading.dismiss();
-    }
+
   }else{
+    this.produto.createdAt = new Date().getTime();
+
     try{
       await this.produtoService.addProdutos(this.produto);
       await this.loading.dismiss();
-      this.navCtrl.navigateBack(['tabs/home']);
-      console.error();
-    }catch(errorr){
-      this.presentToast("Error");
+
+      this.navCtrl.navigateBack('/tabs/home');
+    }catch(error){
+      this.presentToast('Erro ao tentar salvar');
       this.loading.dismiss();
-      console.error();
     }
   }
+
 }
 
 async presentLoading(){

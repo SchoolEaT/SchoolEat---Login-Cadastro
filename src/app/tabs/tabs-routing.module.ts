@@ -86,6 +86,17 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'vendedor/:userId',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../vendedor/vendedor.module').then(m => m.VendedorPageModule),
+              canActivate: [AuthGuard]
+          }
+        ]
+      },
+      {
         path: 'perfil',
         children: [
           {

@@ -1,8 +1,12 @@
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UsuarioService } from './../services/usuario.service';
+import { Subscription } from 'rxjs';
 import { AuthService } from './../services/auth.service';
 import { Usuario } from './../interfaces/usuario';
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { LoadingController, ToastController, NavController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,7 +17,10 @@ import { Router } from '@angular/router';
 export class CadastroPage implements OnInit {
 
 public userRegister: Usuario = {};
-loading: any;
+private usuarioSubscription: Subscription;
+private usuarioId: string = null;
+private loading: any;
+
 
   constructor
   (
@@ -21,27 +28,67 @@ loading: any;
     public toastCtrl: ToastController,
     public authService: AuthService,
     private router: Router,
+    private navCtrl: NavController,
+    private activatedRouter:ActivatedRoute,
+    private afa: AngularFireAuth,
+    private afs: AngularFirestore
+    
 
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit() {
+
   }
+  
+  
+
 
 
   async register(){
+
     await this.presentLoading();
+
+
     try{
-      await  this.authService.register(this.userRegister);
-      this.router.navigate(['/login']);
+      
+
+      const newUser= await this.afa.auth.createUserWithEmailAndPassword(this.userRegister.email, this.userRegister.password);
+      const newUserObject = Object.assign({}, this.userRegister);
+
+      delete newUserObject.email;
+      delete newUserObject.password;
+      await this.afs.collection("Users").doc(newUser.user.uid).set(newUserObject);
+      // this.navCtrl.navigateBack('/login');
     }catch(error){
-      //console.error(error);
-      //alert('Cadastro errado');
-      this.router.navigate(['/cadastro']);
       this.presentToast(error);
     }finally{
       this.loading.dismiss();
     }
+
+
+
+
+
+
   }
+
+    // await this.presentLoading();
+
+    
+    // try{
+    //   await  this.authService.register(this.userRegister);
+    //   this.router.navigate(['/login']);
+    // }catch(error){
+    //   this.router.navigate(['/cadastro']);
+    //   this.presentToast(error);
+    // }finally{
+    //   this.loading.dismiss();
+    // }
+  
+  
+
 
   async presentLoading(){
     this.loading = await this.loadingCtrl.create({

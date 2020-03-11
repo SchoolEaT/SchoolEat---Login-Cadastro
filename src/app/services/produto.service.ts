@@ -37,6 +37,10 @@ private produtosColecao: AngularFirestoreCollection<Produto>;
   listaProdutos(id:string){
     return this.produtosColecao.doc<Produto>(id).valueChanges();
   }
+  listaProdutosId(userId:string){
+    return this.produtosColecao.doc<Produto>(userId).valueChanges();
+  }
+
 
   updateProdutos(id:string, produto: Produto){
     return this.produtosColecao.doc<Produto>(id).update(produto);

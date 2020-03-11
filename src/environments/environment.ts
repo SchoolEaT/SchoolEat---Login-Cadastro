@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
    firebase: {
-    apiKey: "AIzaSyDGfYYnw0sKTaIOVnmlB9SY7SEwMf3s2N0",
-    authDomain: "meu-projeto-5153a.firebaseapp.com",
-    databaseURL: "https://meu-projeto-5153a.firebaseio.com",
-    projectId: "meu-projeto-5153a",
-    storageBucket: "meu-projeto-5153a.appspot.com",
-    messagingSenderId: "923999082849",
-    appId: "1:923999082849:web:1f08c16070292e83c14d20",
-    measurementId: "G-K8QHYE993J"
+    apiKey: "AIzaSyBXcycHc9AC-Db-xFcc0XHSMNN5POOQAqw",
+    authDomain: "schooleat-ad1f7.firebaseapp.com",
+    databaseURL: "https://schooleat-ad1f7.firebaseio.com",
+    projectId: "schooleat-ad1f7",
+    storageBucket: "schooleat-ad1f7.appspot.com",
+    messagingSenderId: "1088533779259",
+    appId: "1:1088533779259:web:a1fd976a4f8203e1b49d1e",
+    measurementId: "G-M40N8G60JV"
   }
 };
 

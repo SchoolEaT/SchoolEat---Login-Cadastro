@@ -11,7 +11,7 @@
   </div>
 
   <div class="pesquisa">
-    <ion-searchbar color="tertiary" animated showCancelButton="focus" placeholder="Ex: Brownie, coxinha"></ion-searchbar>
+    <ion-searchbar color="tertiary" animated showCancelButton="focus" (ionInput)="search($event)" placeholder="Ex: Brownie, coxinha"></ion-searchbar>
     
     <ion-select value="relevancia" okText="Ok" cancelText="Cancelar">
       <ion-select-option value="relevancia">Maior relevancia</ion-select-option>
@@ -21,14 +21,14 @@
     </ion-select>
   </div>
 
-  <div class="resultado">
+  <div class="resultado" *ngFor="let produt of produtos">
   <div class="lista">
-    <p>Nome:</p>
+    <p>Nome:{{produt.nomeProduto}}</p>
     <p>Descrição:</p>
-    <p>Tipo:</p>
-    <p>Valor:</p>
+    <p>Tipo:{{produt.tipoProduto}}</p>
+    <p>Valor:{{produt.valorProduto}}</p>
   </div>
-  <div class="vendedor" routerLink="/tabs/vendedor">
+  <div class="vendedor" [routerLink]="['/tabs/vendedor',produt.IdUser]">
     <h2>DADOS</h2>
     <h2>DO</h2>
     <h2>VENDEDOR</h2>

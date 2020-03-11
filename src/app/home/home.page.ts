@@ -1,8 +1,10 @@
+import { UsuarioService } from './../services/usuario.service';
 import { ProdutoService } from './../services/produto.service';
 import { Produto } from './../interfaces/produto';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -12,27 +14,25 @@ import { Subscription } from 'rxjs';
 export class HomePage implements OnInit {
 
 
-public produtos = new Array<Produto>();
-private produtosSubscription: Subscription;
+
+
+  public produtos = new Array<Produto>();
+  public produto: Subscription;
 
 
 
   constructor
   (
+    public authService:AuthService,
+    public afs: AngularFirestore,
     private produtoService: ProdutoService,
-    public authService: AuthService,
-  ) { 
-    this.produtosSubscription = this.produtoService
-      .getProdutos()
-      .subscribe(data =>{
-        this.produtos = data;
-      });
-      
-  }
+    private usuarioService: UsuarioService
+    )
+    {
+      // this.produto = this.usuarioService.GetProduto().subscribe()
 
-  ngOnDestroy() {
-    this.produtosSubscription.unsubscribe();
-  }
+    }
+
 
   ngOnInit() {
   }

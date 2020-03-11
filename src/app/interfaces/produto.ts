@@ -1,8 +1,9 @@
 export interface Produto {
-    id?: string;
+    produtoId?: string;
     nomeProduto?: string;
     descricaoProduto?:string;
     tipoProduto?:string;
     valorProduto?:string;
-    //usuarioId:string;
+    createdAt?:number;
+    IdUser?:string;
 }
